@@ -1,0 +1,187 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Bitirdiğin Efsanevi Oyunları İşaretle</title>
+  <style>
+    body {
+      background-color:bisque;
+      font-family: Arial, sans-serif;
+      margin: 0;
+    }
+    h1 {
+      text-align: center;
+      margin: 20px 0;
+    }
+    .oyunlar-container {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      margin: 0 auto;
+      padding: 20px;
+      box-sizing: border-box;
+    }
+    .oyun-kutusu {
+      width: calc(25% - 40px);
+      max-width: 200px;
+      height: 320px;
+      border-radius: 10px;
+      box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+      margin: 20px;
+      background-color:antiquewhite;
+      text-align: center;
+      padding: 20px;
+      position: relative;
+      cursor: pointer;
+      transition: transform 0.3s ease-in-out;
+    }
+    .oyun-kutusu:hover {
+      transform: translateY(-5px);
+    }
+    .oyun-kutusu.selected {
+      box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+      border: 2px solid #ff6600;
+    }
+    .oyun-kutusu img {
+      width: 180px;
+      height: 180px;
+      margin-bottom: 10px;
+      object-fit: cover;
+      border-radius: 10px;
+    }
+    .oyun-kutusu h3 {
+      font-size: 16px;
+      color: #333;
+      margin: 0;
+    }
+    #sonuclar-ekrani {
+      display: none;
+      text-align: center;
+      margin-top: 20px;
+    }
+    #sonuclar-ekrani h2 {
+      font-size: 24px;
+      color: #333;
+      margin-bottom: 10px;
+    }
+    #sonuclar-ekrani p {
+      font-size: 18px;
+      color: #666;
+    }
+    .sonuclar-buton {
+      display: block;
+      width: 200px;
+      margin: 0 auto;
+      background-color: #ff6600;
+      color: #fff;
+      font-size: 18px;
+      padding: 10px 20px;
+      border-radius: 5px;
+      border: none;
+      cursor: pointer;
+      transition: background-color 0.3s ease-in-out;
+    }
+    .sonuclar-buton:hover {
+      background-color: #e65500;
+    }
+
+    @media only screen and (max-width: 600px) {
+      .oyun-kutusu {
+        width: calc(50% - 40px);
+        max-width: none;
+      }
+    }
+  </style>
+</head>
+<body>
+  <h1>Bitirdiğin Efsanevi Oyunları İşaretle</h1>
+  <div class="oyunlar-container">
+    <div class="oyun-kutusu" onclick="toggleSelection(this)">
+      <img src="resim1.jpg" alt="Oyun 1 Resmi">
+      <h3>Red Dead Redemption 2</h3>
+    </div>
+    <div class="oyun-kutusu" onclick="toggleSelection(this)">
+      <img src="resim2.jpg" alt="Oyun 2 Resmi">
+      <h3>God of War</h3>
+    </div>
+    <div class="oyun-kutusu" onclick="toggleSelection(this)">
+        <img src="resim3.jpg" alt="Oyun 2 Resmi">
+        <h3>The Last Of Us</h3>
+      </div>
+      <div class="oyun-kutusu" onclick="toggleSelection(this)">
+        <img src="resim4.jpg" alt="Oyun 2 Resmi">
+        <h3>The Last Of Us : Part II</h3>
+      </div>
+      <div class="oyun-kutusu" onclick="toggleSelection(this)">
+        <img src="resim5.jpg" alt="Oyun 2 Resmi">
+        <h3>Uncharted 4: A Thief's End</h3>
+      </div>
+      <div class="oyun-kutusu" onclick="toggleSelection(this)">
+        <img src="resim6.jpg" alt="Oyun 2 Resmi">
+        <h3>Detroit : Become Human</h3>
+      </div>
+      <div class="oyun-kutusu" onclick="toggleSelection(this)">
+        <img src="resim7.jpg" alt="Oyun 2 Resmi">
+        <h3>Marvel : Spider-Man</h3>
+      </div>
+      <div class="oyun-kutusu" onclick="toggleSelection(this)">
+        <img src="resim8.jpg" alt="Oyun 2 Resmi">
+        <h3>Death Stranding</h3>
+      </div>
+      <div class="oyun-kutusu" onclick="toggleSelection(this)">
+        <img src="resim9.jpg" alt="Oyun 2 Resmi">
+        <h3>Ghost of Tsushima</h3>
+      </div>
+      <div class="oyun-kutusu" onclick="toggleSelection(this)">
+        <img src="resim10.jpg" alt="Oyun 2 Resmi">
+        <h3>God of War : Ragnarok</h3>
+      </div>
+      <div class="oyun-kutusu" onclick="toggleSelection(this)">
+        <img src="resim11.jpg" alt="Oyun 2 Resmi">
+        <h3>Days Gone</h3>
+      </div>
+      <div class="oyun-kutusu" onclick="toggleSelection(this)">
+        <img src="resim12.jpg" alt="Oyun 2 Resmi">
+        <h3>Resident Evil Village</h3>
+      </div>
+    <!-- Diğer 10 oyun kutusunu buraya ekleyin -->
+  </div>
+  <button class="sonuclar-buton" onclick="gosterSonuclar()">Sonuçları Göster</button>
+  <div id="sonuclar-ekrani">
+    <h2>Tebrikler!</h2>
+    <p id="oyun-sayisi"></p>
+  </div>
+
+  <script>
+    var secilenKutular = [];
+
+    function toggleSelection(oyunKutusu) {
+      oyunKutusu.classList.toggle('selected');
+      var index = secilenKutular.indexOf(oyunKutusu);
+      if (index === -1) {
+        secilenKutular.push(oyunKutusu);
+      } else {
+        secilenKutular.splice(index, 1);
+      }
+    }
+
+    function gosterSonuclar() {
+      var sonucEkrani = document.getElementById('sonuclar-ekrani');
+      var oyunSayisi = secilenKutular.length;
+
+      if (oyunSayisi >= 1 && oyunSayisi <= 4) {
+        sonucEkrani.innerHTML = '<h2>Fena Değil.</h2><p>Bu kadarını bitirdin: ' + oyunSayisi + '</p>';
+      } else if (oyunSayisi >= 4 && oyunSayisi <= 7) {
+        sonucEkrani.innerHTML = '<h2>İyi Sayılabilir. </h2><p>Bu kadarını bitirdin: ' + oyunSayisi + '</p>';
+      } else if (oyunSayisi >= 7 && oyunSayisi <= 10) {
+        sonucEkrani.innerHTML = '<h2>Ciddisin Değil mi ? </h2><p>Bu kadarını bitirdin: ' + oyunSayisi +  '</p>';
+      } else if (oyunSayisi >= 10 && oyunSayisi <= 12) {
+        sonucEkrani.innerHTML = '<h2>İnanamıyorum! Sen bir oyun delisisin. </h2><p>Bu kadarını bitirdin: ' + oyunSayisi + '</p>';
+      } else {
+        sonucEkrani.innerHTML = '<h2>Hata!</h2><p>Bir hata oluştu, lütfen tekrar deneyin.</p>';
+      }
+
+      sonucEkrani.style.display = 'block';
+    }
+  </script>
+</body>
+</html>
